@@ -5,7 +5,8 @@ from rest_framework.generics import (
 
 from blogapi_postgres.models import Article
 from .serializers import ArticleSerializer
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly 
+from rest_framework.permissions import IsAuthenticated
 
 class ArticlesListView(ListCreateAPIView):
     queryset = Article.objects.all()
@@ -16,4 +17,4 @@ class ArticlesListView(ListCreateAPIView):
 class ArticlesDetailView(RetrieveUpdateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = (IsOwnerOrReadOnly, )
+    permission_classes = (IsOwnerOrReadOnly,IsAuthenticated  )
